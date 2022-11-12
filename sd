@@ -1,0 +1,65 @@
+from flask import  request, Flask
+import requests
+from PIL import Image
+from twilio.twiml.messaging_response import MessagingResponse
+import datetime
+from openpyxl import Workbook
+wb = Workbook()
+
+#msg.media(link) to send images etc
+#x = datetime.datetime.now()
+app = Flask(__name__)
+@app.route('/bot', methods =['POST'])
+def bot():
+    x = datetime.datetime.now()
+    #15-04-2023--21-04-2023  if(x.day>=15 or x.day<=21 and x.month==4  and x.year == 2023 )
+    if(x.day == 12): #during
+        user_msg = request.values.get('Body', '').lower()
+        # user_msg1 = request.values.get('Body', '').lower()
+        bot_response = MessagingResponse()
+        msg = bot_response.message()
+        wish = ['hello', 'hi', 'hey']
+        if user_msg in wish:
+            s1 = ''' a)Registeration for VITEE
+            b) Already Registered 
+            c) Get details
+                  '''
+
+            msg.body("At your service!!\nHow may I help you?\n" + s1)
+
+
+        elif "a" in user_msg:
+            s1 = '''Price details - fee 800
+            upi id- akhilgudisev2003@okhdfcbank
+            '''
+            
+
+        return (str(bot_response))
+    elif (x.day >= 21  and x.month >= 5 and x.year == 2023): #post
+        pass
+    else : #pre
+        pass
+        #return str(bot_response)
+
+if __name__=="__main__":
+    app.run(debug=True)
+
+'''
+cutoff_spec  = ["cse","mech"]
+        cutoff_rank = ["300","350"]
+        for i in range (len(cutoff_spec)):
+            str1 = cutoff_spec[i]+" : "+cutoff_rank[i]+"\n"
+            msg.body(str1)
+'''
+'''
+s1 = "Do you want ?"
+        msg.body("The exam date is on DD-MM-YYYY")
+'''
+'''
+ls1 = ["Director Admissions","The Registrar","VIT-AP University
+Admin. Office"]
+ls2 = [" admission@vitap.ac.in","info@vitap.ac.in"," adminoffice@vitap.ac.in"]
+ls3=["0863 2370444","-","7901311658"]
+
+'''
+
